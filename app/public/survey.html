@@ -48,11 +48,59 @@
 	    </footer>
 
     </div>
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
     <script type='text/javascript'>
+    
+        var friends = [
+            {
+                "name":"Ahmed",
+                "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+                "scores":[
+                    5,
+                    1,
+                    4,
+                    4,
+                    5,
+                    1,
+                    2,
+                    5,
+                    4,
+                    1
+                ]
+            }
+        ];
+        function NewFriend (name, picUrl, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10){
+            this.name = name;
+            this.picUrl = picUrl;
+            this.scores = [];
+            this.scores[0] = r1;
+            this.scores[1] = r2;
+            this.scores[2] = r3;
+            this.scores[3] = r4;
+            this.scores[4] = r5;
+            this.scores[5] = r6;
+            this.scores[6] = r7;
+            this.scores[7] = r8;
+            this.scores[8] = r9;
+            this.scores[9] = r10;
+            friends.push(this);
+            console.log('success a new friend was created');
+            // friends.forEach(sumOfDifferences());
+        };
+    
+        function sumOfDifferences(increasingNumber){
+            var sum = 0; 
+            var sums = [];
+            for(var j= 0; j<10; j++){
+                sum += Math.abs(friends[friends.length-1].scores[j] - friends[increasingNumber].scores[j]);
+            }
+            sums.push(sum);
+            console.log(sums);
+        }
         var questions = [
-            "I make friends easily",
-            "I prefer variety to routine",
             "I have to get my inbox to 0 unread messages each day",
+            "I prefer variety to routine",
+            "I'm outgoing and make friends easily",
             "I would never cheat on my taxes",
             "I don't know why I do some of the things I do",
             "I feel comfortable in large groups",
@@ -76,7 +124,29 @@
                 )
             );
         }
-        $('#gray').css('font-color', 'gray');
+
+        $(document).on('click', '#submit', function(){
+            var name = $('#name').val();
+            var picUrl = $('#photo').val();
+            var r1 = parseInt($('#q1').val());
+            var r2 = parseInt($('#q2').val());
+            var r3 = parseInt($('#q3').val());
+            var r4 = parseInt($('#q4').val());
+            var r5 = parseInt($('#q5').val());
+            var r6 = parseInt($('#q6').val());
+            var r7 = parseInt($('#q7').val());
+            var r8 = parseInt($('#q8').val());
+            var r9 = parseInt($('#q9').val());
+            var r10 = parseInt($('#q10').val());
+            new NewFriend(name, picUrl, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10);
+            for(var i=0; i<friends.length-1; i++){
+                sumOfDifferences(i);
+            }
+        })
+
+
+        var newFriend = friends[friends.length];
+        console.log(newFriend);
     </script>
     
 </body>
