@@ -1,11 +1,14 @@
-module.exports = function(app, path){
+var friendsArray = require("../data/friends");
 
-    app.get("/api/friends", function(req, res){
-        res.sendFile(path.join(__dirname,'../public/api/friends.html'));
+module.exports = function (app, path) {
+
+    app.get("/api/friends", function (req, res) {
+        res.json(friendsArray);
     })
 
-    app.post("/api/friends", function(req, res){
-        res.sendFile(path.join(__dirname, '../public/home.html'))
+    app.post("/api/friends", function (req, res) {
+        friendsArray.push(req.body);
+        res.json(true);
     })
 
 }

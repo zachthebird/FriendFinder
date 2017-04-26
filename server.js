@@ -8,10 +8,15 @@ var port = 4444;
 
 var app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+require("./app/routing/apiRoutes")(app);
+require("./app/routing/htmlRoutes")(app);
 
-require('./app/routing/htmlRoutes.js')(app, path);
-// require('./app/routing/apiRoutes.js')(app, path);
-require('./app/routing/apiRoutes.js')(app, path);
+
+
 
 app.listen(port, function(req, res){
     console.log("Listening on port "+port);
